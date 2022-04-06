@@ -2,16 +2,21 @@
 library(tidyverse)
 library(ggplot2)
 library(GGally)
-
+library(rsample)
 # Read the dataset
 data <- read_csv("./data/food_hygiene_rating_data.csv", col_names=TRUE)
 
 # Clean the dataset
+
 data_eda <- data %>% 
   select(LocalAuthorityCode, RatingDate, BusinessType, RatingValue) %>%
+  mutate(Year = format(RatingDate, "%Y") %>% as.numeric(),
+         Month = format(RatingDate, "%m") %>% as.numeric(), 
+         Day = format(RatingDate, "%d") %>% as.numeric(),
+         BusinessType = BusinessType <- as.factor(BusinessType),
+         RatingValue = RatingValue <- as.factor(RatingValue)) %>%
+  select(-RatingDate) %>%
   drop_na()
-any(is.na(data_eda))
-
 
 summary(data_eda)
 
@@ -37,6 +42,10 @@ ggplot(data=data_eda, aes(x=factor(RatingValue))) +
   theme(plot.title = element_text(hjust = 0.5))
 ggsave("./results/RV_bar.png")
 
+data_split <- initial_split(data_eda, prop = 0.75, strata = RatingValue)
+training_data <- training(data_split)
+testing_data <- testing(data_split)
 
+mod1 <- glm(RatingValue~LocalAuthorityCode+BusinessType+Year+Month+Day, data=training_data, family="binomial")
 
 
