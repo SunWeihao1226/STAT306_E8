@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-Public food safety is of concern to the general population. The Food Hygiene Agency in the United Kingdom puts out a report on the food hygiene rating in the boroughs of London from 2002 to 2022. The data is collected by multiple participating local authorities in the London area and was aggregated by the Food Hygiene Agency for honest communication between the government and citizens with topic of Health in mind. Based on both governmental and our concern, we will investigate the relationship between the food hygiene evaluation and the date of inspection, area (health authority), and business type of the food service provider. In this study, we want to generate a model that causally explains what determines good or bad in the hygiene evaluation of restaurants across London and, possibly, make predictive assessments such that it can help the public have more tooling and information for assessing the outcome of future restaurants hygiene inspections to help empower consumer consciousness. In the dataset, we will define a new variable food hygiene rating with a rating of 3 to 5 as ’good‘ hygiene condition and 0 to 2 as ‘not good’ hygiene condition in order to make our food hygiene evaluation a binary response variable. Furthermore, we will exclude all the businesses that have not gotten reviewed or have not been reviewed yet. For our model, there are 3 explanatory variables in our study. The food business type is a categorical variable with 5 levels: Restaurant/Cafe/Canteen, Retailers-other, Takeaway/sandwich shop, Other catering premises, and Hospitals/Childcare/Caring Premises. The date of inspection is the date at which the hygiene review took place, from 2002 to 2022, and we will exclude the data that does not have a date.
+Public food safety is of concern to the general population. The Food Hygiene Agency in the United Kingdom puts out a report on the food hygiene rating in the boroughs of London from 2002 to 2022. We will use the [UK Food Hygiene Rating Data (London)](https://www.kaggle.com/datasets/datota/uk-food-hygiene-rating-data-london). The data is collected by multiple participating local authorities in the London area and was aggregated by the Food Hygiene Agency for honest communication between the government and citizens with topic of Health in mind, and published by DATOTA (2022) on Kaggle. Based on both governmental and our concern, we will investigate the relationship between the food hygiene evaluation and the date of inspection, area (health authority), and business type of the food service provider. In this study, we want to generate a model that causally explains what determines good or bad in the hygiene evaluation of restaurants across London and, possibly, make predictive assessments such that it can help the public have more tooling and information for assessing the outcome of future restaurants hygiene inspections to help empower consumer consciousness. In the dataset, we will define a new variable food hygiene rating with a rating of 3 to 5 as ’good‘ hygiene condition and 0 to 2 as ‘not good’ hygiene condition in order to make our food hygiene evaluation a binary response variable. Furthermore, we will exclude all the businesses that have not gotten reviewed or have not been reviewed yet. For our model, there are 3 explanatory variables in our study. The food business type is a categorical variable with 5 levels: Restaurant/Cafe/Canteen, Retailers-other, Takeaway/sandwich shop, Other catering premises, and Hospitals/Childcare/Caring Premises. The date of inspection is the date at which the hygiene review took place, from 2002 to 2022, and we will exclude the data that does not have a date.
 
 
 ## Analysis
@@ -71,8 +71,12 @@ Finally, Year and Month were found to both have significant negative effect on t
 
 Overall, we are satisfied with this model as it offers good explanations to the variables we are interested in and has high predictive power (0.935) on a large dataset. However, as mentioned above, more work is needed to draw conclusions regarding the geography of pass rate, the Other business category, and the effects of passing time and the COVID-19 pandemic.
 
+
 ## Reference
 
+- DATOTA. (2022). *UK Food Hygiene Rating Data (London)*[Data Set]. https://www.kaggle.com/datasets/datota/uk-food-hygiene-rating-data-london 
+
+\newpage
 ## Appendix - R Script
 
 ```{r results='hide',message=FALSE}
@@ -158,6 +162,6 @@ write.csv(conf_mat, file="./results/conf_mat.csv")
 
 ## Appendix - Model Summary
 
-```{r}
+```{r echo=FALSE}
 mod_sum
 ```
