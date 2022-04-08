@@ -61,6 +61,16 @@ The final accuracy of the model is `r final_acc`, and the AIC is almost 7000.
 
 ## Conclusion
 
+The summary of the model fitted is attached in the appendix.
+
+Examining the summary of the model fitted, we can see that not all of the variables collected have explanatory value. LocalAuthorityCode does not seem to have significant explanatory power to the pass rate of food provider health checks. This is not surprising. Originally, we thought that due to varying socioeconomic circumstances among the boroughs of London, we could see a geographical contribution to health check pass rate where poorer neighborhoods were less likely to pass. However, the variable LocalAuthorityCode only encodes the arbitrary number designation of the borough and not its geographical location or socioeconomic status. If we wanted to explore this aspect further, more descriptive data such as household income of area or crime statistics will be much more useful to the model. As it currently stands this particular variable does not offer anything of interest.
+
+Among the business types, Hospital/Childcare/Caring Premises, Other catering premises, and School/College/University were the categories of business types found significantly impacting the pass rate. Schools and Hospitals were found significant at level 0.01, while Other was found significant at level 0.05. All three of these categories had a positive effect on the logit transformed pass rate orders of magnitude larger than other categories. This result confirms our priors that public institutions are going to have the best compliance to public health standards. Hospitals and schools also interact with immunocompromised groups such as children and the elderly, so risks of poor hygiene have an outsized negative risk to the public. In terms of the Other category, the model serves as motivation to gather more data among these business types to offer more precise explanation.
+
+Finally, Year and Month were found to both have significant negative effect on the logit transformed pass rate. This suggests that, over the course of a year and over the years, pass rate has declined. Originally we thought that the month component in decline could be that food hygiene standards worsen as London enters the holiday seasons, but given that the estimated change for the year (-4.883e-01) is roughly 12x that of the estimated negative change for the month (-4.648e-02), it seems that the change is the result of a continuous decline of pass rate, rather than some within-year seasonality. There could be many explanations to the decline of pass rate, one worth noting is that the range of data covers time both before and during the COVID-19 pandemic, when the food service industry experienced drastic changes such as additional pandemic safety restriction and standards. These unprecedented circumstances may be a contributing factor to the decline in pass rate.
+
+Overall, we are satisfied with this model as it offers good explanations to the variables we are interested in and has high predictive power (0.935) on a large dataset. However, as mentioned above, more work is needed to draw conclusions regarding the geography of pass rate, the Other business category, and the effects of passing time and the COVID-19 pandemic.
+
 ## Reference
 
 ## Appendix - R Script
@@ -119,7 +129,7 @@ ggplot(data=data_eda, aes(x=factor(Pass)), height=3) +
 ggsave("./results/RV_bar.png")
 ```
 
-```{r eval = FALSE,message=FALSE}
+```{r message=FALSE}
 # Split the dataset into training and testing sets
 data_split <- initial_split(data_eda, prop = 0.75, strata = RatingValue)
 training_data <- training(data_split)
@@ -146,3 +156,8 @@ write.csv(acc,file="./results/accuracy.csv")
 write.csv(conf_mat, file="./results/conf_mat.csv")
 ```
 
+## Appendix - Model Summary
+
+```{r}
+mod_sum
+```
