@@ -14,7 +14,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-<!--Write introduction here-->
+Public food safety is of concern to the general population. Food Hygiene Agency in London puts out a report on the food hygiene rating in the boroughs of London from 2002 to 2022. Based on that, we will investigate the relationship between the food hygiene evaluation and the date of inspection, area (health authority), and business type of the food service provider. In this study, we define the food provider with food hygiene rating with 3 to 5 as “good”hygiene condition, and 0 to 2 as “not good” hygiene condition to make our food hygiene evaluation as a binary response variable, and we will exclude the businesses that did not get reviewed and have not been reviewed yet. There are 3 explanatory variables in our study. The food business type is a categorical variable with 5 levels, including Restaurant/Cafe/Canteen, Retailers-other, Takeaway/sandwich shop, Other catering premises and Hospitals/Childcare/Caring Premises. The date of inspection is the date at which the hygiene review took place, from 2002 to 2022, and we will exclude the data that does not have a date. In this study, we want to develop a model that explains what determine good or bad in hygiene evaluation for restaurants across London as well as helps the public make predictions on the outcome of future restaurants hygiene inspections. 
+
 
 ## Analysis
 
